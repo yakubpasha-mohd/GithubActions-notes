@@ -1,0 +1,45 @@
+A GitHub Actions workflow skeleton provides a basic structure for automating tasks within a GitHub repository. Workflows are defined in YAML files within the .github/workflows/ directory of your repository.
+Here's a common skeleton for a basic GitHub Actions workflow:
+
+name: My Workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+
+Explanation of the skeleton:
+name: A human-readable name for your workflow. This appears in the GitHub Actions UI.
+on: Defines the events that trigger the workflow.
+push: Triggers the workflow when code is pushed to the specified branches (e.g., main).
+pull_request: Triggers the workflow when a pull request is opened, synchronized, or reopened targeting the specified branches.
+jobs: A collection of jobs that run in the workflow.
+build: The name of a specific job. You can have multiple jobs.
+runs-on: Specifies the type of runner (virtual machine) where the job will execute (e.g., ubuntu-latest, windows-latest, macos-latest).
+steps: A sequence of tasks that the job will perform.
+name: A descriptive name for each step.
+uses: Specifies a reusable action from the GitHub Marketplace or a local action (e.g., actions/checkout@v4 to check out your repository code).
+with: Provides input parameters to the action (e.g., node-version: '20' for actions/setup-node).
+run: Executes a command-line script directly on the runner.
